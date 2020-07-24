@@ -114,4 +114,21 @@ class ParkingBoyTest {
         //then
         Assertions.assertNull(ticket);
     }
+
+    @Test
+    void should_return_null_when_parking_given_a_parked_car() {
+        //given
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
+        Mockito.when(parkingLot.getMaxSize()).thenReturn(0);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car(1);
+
+        //when
+        Ticket ticketFirst = parkingBoy.parking(car);
+        Ticket ticket = parkingBoy.parking(car);
+
+        //then
+        Assertions.assertNotNull(ticketFirst);
+        Assertions.assertNull(ticket);
+    }
 }

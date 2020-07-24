@@ -10,6 +10,7 @@ public class ParkingLot {
     private int currentSize;
 
     public ParkingLot() {
+        this.currentSize = 0;
         this.cars = new ArrayList<>(maxSize);
     }
 
