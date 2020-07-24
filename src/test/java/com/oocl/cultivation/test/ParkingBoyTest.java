@@ -100,4 +100,17 @@ class ParkingBoyTest {
         Assertions.assertNull(car);
     }
 
+    @Test
+    void should_return_null_when_parking_given_a_full_parking_lot_and_a_extra_car() {
+        //given
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car(1);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car);
+
+        //then
+        Assertions.assertNull(ticket);
+    }
 }

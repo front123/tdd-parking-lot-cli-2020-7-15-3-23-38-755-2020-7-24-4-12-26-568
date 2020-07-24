@@ -7,6 +7,7 @@ public class ParkingLot {
 
     private final List<Car> cars ;
     private final int maxSize = 10;
+    private int currentSize;
 
     public ParkingLot() {
         this.cars = new ArrayList<>(maxSize);
@@ -18,5 +19,13 @@ public class ParkingLot {
 
     public List<Car> getCars() {
         return cars;
+    }
+
+    public int getCurrentSize() {
+        return currentSize;
+    }
+
+    public void setCurrentSize(int currentSize) {
+        this.currentSize = currentSize;
     }
 }
