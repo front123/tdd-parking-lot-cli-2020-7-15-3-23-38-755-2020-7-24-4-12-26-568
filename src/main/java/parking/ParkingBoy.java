@@ -17,7 +17,7 @@ public class ParkingBoy {
 
     public Car fetchCar(Ticket ticket) {
         for (Car car: parkingLot.getCars()) {
-            if(car.getId() == ticket.getId()){
+            if(ticket!=null && car.getId() == ticket.getId()){
                 return car;
             }
         }
