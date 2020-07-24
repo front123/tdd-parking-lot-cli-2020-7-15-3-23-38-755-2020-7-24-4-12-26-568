@@ -7,6 +7,6 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(String ticket) {
-        return null;
+        return new Car(1);
     }
 }
