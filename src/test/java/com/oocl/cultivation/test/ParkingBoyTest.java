@@ -81,4 +81,23 @@ class ParkingBoyTest {
         //then
         Assertions.assertNull(car);
     }
+
+    @Test
+    void should_return_null_when_fetch_car_given_a_already_used_ticket() {
+        //given
+        Ticket ticket = new Ticket(1);
+        ticket.setValid(false);
+        Car car1 = new Car(1);
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        Mockito.when(parkingLot.getCars()).thenReturn(cars);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Car car = parkingBoy.fetchCar(ticket);
+
+        //then
+        Assertions.assertNull(car);
+    }
+
 }
