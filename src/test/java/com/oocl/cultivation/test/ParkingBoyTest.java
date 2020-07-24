@@ -104,6 +104,7 @@ class ParkingBoyTest {
     void should_return_null_when_parking_given_a_full_parking_lot_and_a_extra_car() {
         //given
         Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
+        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car(1);
 

@@ -21,6 +21,10 @@ public class ParkingLot {
         return cars;
     }
 
+    public int getMaxSize() {
+        return maxSize;
+    }
+
     public int getCurrentSize() {
         return currentSize;
     }

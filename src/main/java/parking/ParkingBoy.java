@@ -12,6 +12,9 @@ public class ParkingBoy {
     }
 
     public Ticket parking(Car car){
+        if (parkingLot.getCurrentSize() == parkingLot.getMaxSize()){
+            return null;
+        }
         return new Ticket(1);
     }
 
