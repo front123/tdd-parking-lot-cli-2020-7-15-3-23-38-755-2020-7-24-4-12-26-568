@@ -19,6 +19,11 @@ public class ParkingBoy {
     }
 
     public Car fetchCar(String ticket) {
-        return new Car(1);
+        for (Car car: parkingLot) {
+            if(ticket.equals(String.valueOf(car.getId()))){
+                return car;
+            }
+        }
+        return null;
     }
 }

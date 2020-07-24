@@ -27,17 +27,20 @@ class ParkingBoyTest {
     void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() {
         //given
         String ticket = "1";
-        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car1 = new Car(1);
+        List<Car> parkingLot = new LinkedList<>();
+        parkingLot.add(car1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
         Car car = parkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals(1,car.getId());
+        Assertions.assertEquals(1, car.getId());
     }
 
     @Test
-    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_parking_boy_and_a_ticket() {
+    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_a_ticket() {
         //given
         Car car1 = new Car(1);
         Car car2 = new Car(2);
