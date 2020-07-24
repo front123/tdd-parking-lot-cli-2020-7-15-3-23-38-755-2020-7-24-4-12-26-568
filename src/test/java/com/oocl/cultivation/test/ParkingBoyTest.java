@@ -57,4 +57,19 @@ class ParkingBoyTest {
         Assertions.assertEquals(car2, correspondCar);
 
     }
+
+    @Test
+    void should_return_null_when_fetch_car_given_a_null_ticket() {
+        //given
+        Car car1 = new Car(1);
+        List<Car> parkingLot = new LinkedList<>();
+        parkingLot.add(car1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Car car = parkingBoy.fetchCar(null);
+
+        //then
+        Assertions.assertNull(car);
+    }
 }

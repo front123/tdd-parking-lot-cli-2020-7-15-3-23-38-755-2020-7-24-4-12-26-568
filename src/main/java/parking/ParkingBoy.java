@@ -20,7 +20,7 @@ public class ParkingBoy {
 
     public Car fetchCar(String ticket) {
         for (Car car: parkingLot) {
-            if(ticket.equals(String.valueOf(car.getId()))){
+            if(String.valueOf(car.getId()).equals(ticket)){
                 return car;
             }
         }
