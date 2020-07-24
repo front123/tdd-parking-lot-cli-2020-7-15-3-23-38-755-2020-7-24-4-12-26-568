@@ -5,22 +5,19 @@ import java.util.List;
 
 public class ParkingBoy {
 
-    private final List<Car> parkingLot;
+    private final ParkingLot parkingLot;
 
-    public ParkingBoy() {
-        parkingLot = new ArrayList<>();
-    }
-    public ParkingBoy(List<Car> parkingLot) {
+    public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 
-    public String parking(Car car){
-        return "1";
+    public Ticket parking(Car car){
+        return new Ticket(1);
     }
 
-    public Car fetchCar(String ticket) {
-        for (Car car: parkingLot) {
-            if(String.valueOf(car.getId()).equals(ticket)){
+    public Car fetchCar(Ticket ticket) {
+        for (Car car: parkingLot.getCars()) {
+            if(car.getId() == ticket.getId()){
                 return car;
             }
         }

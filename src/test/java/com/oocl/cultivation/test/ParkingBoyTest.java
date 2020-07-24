@@ -5,31 +5,38 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import parking.Car;
 import parking.ParkingBoy;
+import parking.ParkingLot;
+import parking.Ticket;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 class ParkingBoyTest {
+
+    private final ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
     @Test
     void should_return_a_ticket_when_parking_given_a_car() {
         //given
         Car car = new Car(1);
-        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        String ticket = parkingBoy.parking(car);
+        Ticket ticket = parkingBoy.parking(car);
 
         //then
-        Assertions.assertEquals("1", ticket);
+        Assertions.assertEquals(1, ticket.getId());
     }
 
     @Test
     void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() {
         //given
-        String ticket = "1";
+        Ticket ticket = new Ticket(1);
         Car car1 = new Car(1);
-        List<Car> parkingLot = new LinkedList<>();
-        parkingLot.add(car1);
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        Mockito.when(parkingLot.getCars()).thenReturn(cars);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
@@ -44,11 +51,12 @@ class ParkingBoyTest {
         //given
         Car car1 = new Car(1);
         Car car2 = new Car(2);
-        List<Car> parkingLot = new LinkedList<>();
-        parkingLot.add(car1);
-        parkingLot.add(car2);
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        cars.add(car2);
+        Mockito.when(parkingLot.getCars()).thenReturn(cars);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        String ticket = "2";
+        Ticket ticket = new Ticket(2);
 
         //when
         Car correspondCar = parkingBoy.fetchCar(ticket);
@@ -62,8 +70,9 @@ class ParkingBoyTest {
     void should_return_null_when_fetch_car_given_a_null_ticket() {
         //given
         Car car1 = new Car(1);
-        List<Car> parkingLot = new LinkedList<>();
-        parkingLot.add(car1);
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        Mockito.when(parkingLot.getCars()).thenReturn(cars);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
