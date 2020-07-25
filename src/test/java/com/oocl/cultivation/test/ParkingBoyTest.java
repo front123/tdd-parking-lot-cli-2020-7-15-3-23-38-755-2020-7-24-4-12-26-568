@@ -179,6 +179,17 @@ class ParkingBoyTest {
 
         //then
         Assertions.assertEquals("Please provide your parking ticket.", message);
+    }
 
+    @Test
+    void should_return_not_enough_position_when_parking_for_feedback_given_a_car_and_a_full_parking_lot() {
+        //given
+        Car car = new Car(1);
+        Mockito.when(parkingLot.isFull()).thenReturn(true);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        //when
+        String message = parkingBoy.parkingForFeedback(car);
+        //then
+        Assertions.assertEquals("Not enough position.", message);
     }
 }

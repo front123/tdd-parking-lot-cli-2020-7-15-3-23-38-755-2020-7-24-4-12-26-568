@@ -34,4 +34,8 @@ public class ParkingBoy {
         }
         return "Unrecognized parking ticket.";
     }
+
+    public String parkingForFeedback(Car car) {
+        return null;
+    }
 }
