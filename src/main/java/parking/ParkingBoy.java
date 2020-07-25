@@ -29,6 +29,9 @@ public class ParkingBoy {
     }
 
     public String fetchCarForFeedback(Ticket ticket) {
+        if (ticket == null){
+            return "Please provide your parking ticket.";
+        }
         return "Unrecognized parking ticket.";
     }
 }
