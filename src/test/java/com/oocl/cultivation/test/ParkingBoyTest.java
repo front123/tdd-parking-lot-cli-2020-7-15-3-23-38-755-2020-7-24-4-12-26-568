@@ -166,4 +166,19 @@ class ParkingBoyTest {
         Assertions.assertEquals("Unrecognized parking ticket.", message);
 
     }
+
+    @Test
+    void should_return_provide_ticket_message_when_fetch_for_feedback_given_null_ticket() {
+        //given
+        Ticket ticket = null;
+        Mockito.reset(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        String message = parkingBoy.fetchCarForFeedback(ticket);
+
+        //then
+        Assertions.assertEquals("Please provide your parking ticket.", message);
+
+    }
 }
