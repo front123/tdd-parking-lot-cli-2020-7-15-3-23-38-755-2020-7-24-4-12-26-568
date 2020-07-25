@@ -118,8 +118,9 @@ class ParkingBoyTest {
     @Test
     void should_return_null_when_parking_given_a_parked_car() {
         //given
-        Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
-        Mockito.when(parkingLot.getMaxSize()).thenReturn(0);
+        Mockito.reset(parkingLot);
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(0);
+        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car(1);
 
@@ -130,6 +131,22 @@ class ParkingBoyTest {
 
         //then
         Assertions.assertNotNull(ticketFirst);
+        Assertions.assertNull(ticket);
+    }
+
+    @Test
+    void should_return_null_when_parking_given_a_null_car() {
+        //given
+        Mockito.reset(parkingLot);
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(0);
+        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
+        Car car = null;
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car);
+
+        //then
         Assertions.assertNull(ticket);
     }
 }
