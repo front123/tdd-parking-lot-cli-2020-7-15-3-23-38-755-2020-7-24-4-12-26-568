@@ -6,12 +6,18 @@ import java.util.List;
 public class ParkingLot {
 
     private final List<Car> cars ;
-    private final int maxSize = 10;
+    private final int capacity;
     private int currentSize;
 
     public ParkingLot() {
         this.currentSize = 0;
-        this.cars = new ArrayList<>(maxSize);
+        this.capacity = 10;
+        this.cars = new ArrayList<>(capacity);
+    }
+    public ParkingLot(int capacity) {
+        this.currentSize = 0;
+        this.capacity = capacity;
+        this.cars = new ArrayList<>(capacity);
     }
 
     public Ticket parking(Car car){
@@ -29,5 +35,9 @@ public class ParkingLot {
 
     public int getCurrentSize() {
         return currentSize;
+    }
+
+    public int getEmptyPositionSize(){
+        return capacity - currentSize;
     }
 }
