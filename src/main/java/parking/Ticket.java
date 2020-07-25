@@ -31,7 +31,4 @@ public class Ticket {
         return parkingLotName;
     }
 
-    public void setParkingLotName(String parkingLotName) {
-        this.parkingLotName = parkingLotName;
-    }
 }

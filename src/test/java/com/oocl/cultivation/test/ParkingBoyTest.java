@@ -213,4 +213,25 @@ class ParkingBoyTest {
         Assertions.assertEquals(1, ticket.getId());
         Assertions.assertNull(message);
     }
+
+
+    @Test
+    void should_parking_into_more_empty_position_parking_lot_when_parking_given_two_parking_lot_in_different_empty_position() {
+        //given
+        Car car = new Car(1);
+        Ticket ticket1 = new Ticket(1, "parking lot 1");
+        Ticket ticket2 = new Ticket(1, "parking lot 2");
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(2);
+        Mockito.when(parkingLot2.getCurrentSize()).thenReturn(1);
+        Mockito.when(parkingLot.parking(car)).thenReturn(ticket1);
+        Mockito.when(parkingLot2.parking(car)).thenReturn(ticket2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car);
+
+        //then
+        Assertions.assertNotNull(ticket);
+        Assertions.assertEquals(ticket2.getParkingLotName(), ticket.getParkingLotName());
+    }
 }
