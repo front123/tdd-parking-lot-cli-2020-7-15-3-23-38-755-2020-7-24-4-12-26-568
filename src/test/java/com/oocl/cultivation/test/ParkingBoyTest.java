@@ -227,10 +227,10 @@ class ParkingBoyTest {
         Mockito.when(parkingLot2.getCurrentSize()).thenReturn(1);
         Mockito.when(parkingLot.parking(car)).thenReturn(ticket1);
         Mockito.when(parkingLot2.parking(car)).thenReturn(ticket2);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+        ParkingBoy smartParkingBoy = new ParkingBoy(parkingLot, parkingLot2);
 
         //when
-        Ticket ticket = parkingBoy.parking(car);
+        Ticket ticket = smartParkingBoy.parking(car);
 
         //then
         Assertions.assertNotNull(ticket);
