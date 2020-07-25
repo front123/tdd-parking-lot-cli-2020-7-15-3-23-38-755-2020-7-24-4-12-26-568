@@ -23,15 +23,14 @@ public class ParkingBoy {
         if (car == null || (parkingLot.isFull() && isParkingLot2Full) ){
             return null;
         }
-        if (parkingLot.parking(car) == null){
+        Ticket ticketResult = parkingLot.parking(car);
+        if (ticketResult == null){
             if (parkingLot2 == null){
                 return  null;
             }
-            if (parkingLot2.parking(car) == null){
-                return  null;
-            }
+            ticketResult = parkingLot2.parking(car);
         }
-        return new Ticket(1);
+        return ticketResult;
     }
 
     public Car fetchCar(Ticket ticket) {
