@@ -20,6 +20,8 @@ class ParkingBoyTest {
     void should_return_a_ticket_when_parking_given_a_car() {
         //given
         Car car = new Car(1);
+        Mockito.when(parkingLot.isFull()).thenReturn(false);
+        Mockito.when(parkingLot.parking(car)).thenReturn(new Ticket(1));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
@@ -103,8 +105,7 @@ class ParkingBoyTest {
     @Test
     void should_return_null_when_parking_given_a_full_parking_lot_and_a_extra_car() {
         //given
-        Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
-        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
+        Mockito.when(parkingLot.isFull()).thenReturn(true);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car(1);
 
@@ -119,14 +120,15 @@ class ParkingBoyTest {
     void should_return_null_when_parking_given_a_parked_car() {
         //given
         Mockito.reset(parkingLot);
-        Mockito.when(parkingLot.getCurrentSize()).thenReturn(0);
-        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car(1);
+        Mockito.when(parkingLot.isFull()).thenReturn(false);
+        Mockito.when(parkingLot.parking(car)).thenReturn(new Ticket(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
 
         //when
         Ticket ticketFirst = parkingBoy.parking(car);
-        Mockito.when(parkingLot.parking(car)).thenReturn(new Ticket(1));
+        Mockito.when(parkingLot.parking(car)).thenReturn(null);
         Ticket ticket = parkingBoy.parking(car);
 
         //then
@@ -138,8 +140,7 @@ class ParkingBoyTest {
     void should_return_null_when_parking_given_a_null_car() {
         //given
         Mockito.reset(parkingLot);
-        Mockito.when(parkingLot.getCurrentSize()).thenReturn(0);
-        Mockito.when(parkingLot.getMaxSize()).thenReturn(10);
+        Mockito.when(parkingLot.isFull()).thenReturn(false);
         Car car = null;
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 

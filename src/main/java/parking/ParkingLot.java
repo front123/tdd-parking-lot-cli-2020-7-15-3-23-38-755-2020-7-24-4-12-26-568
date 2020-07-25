@@ -22,15 +22,8 @@ public class ParkingLot {
         return cars;
     }
 
-    public int getMaxSize() {
-        return maxSize;
-    }
 
-    public int getCurrentSize() {
-        return currentSize;
-    }
-
-    public void setCurrentSize(int currentSize) {
-        this.currentSize = currentSize;
+    public boolean isFull() {
+        return false;
     }
 }
