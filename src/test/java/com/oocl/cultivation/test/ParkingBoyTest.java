@@ -16,6 +16,7 @@ import java.util.List;
 class ParkingBoyTest {
 
     private final ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+    private final ParkingLot parkingLot2 = Mockito.mock(ParkingLot.class);
     @Test
     void should_return_a_ticket_when_parking_given_a_car() {
         //given
@@ -191,5 +192,23 @@ class ParkingBoyTest {
         String message = parkingBoy.parkingForFeedback(car);
         //then
         Assertions.assertEquals("Not enough position.", message);
+    }
+
+    @Test
+    void should_return_ticket_when_parking_given_a_car_a_full_parking_lot_a_not_full_parking_lot() {
+        //given
+        Car car = new Car(1);
+        Mockito.when(parkingLot.isFull()).thenReturn(true);
+        Mockito.when(parkingLot2.isFull()).thenReturn(false);
+        Mockito.when(parkingLot2.parking(car)).thenReturn(new Ticket(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car);
+        String message = parkingBoy.parkingForFeedback(car);
+
+        //then
+        Assertions.assertEquals(1, ticket.getId());
+        Assertions.assertNull(message);
     }
 }

@@ -6,9 +6,16 @@ import java.util.List;
 public class ParkingBoy {
 
     private final ParkingLot parkingLot;
+    private final ParkingLot parkingLot2;
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
+        this.parkingLot2 = null;
+    }
+
+    public ParkingBoy(ParkingLot...parkingLots) {
+        this.parkingLot = parkingLots[0];
+        this.parkingLot2 = parkingLots[1];
     }
 
     public Ticket parking(Car car){
