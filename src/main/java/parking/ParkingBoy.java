@@ -24,7 +24,7 @@ public class ParkingBoy {
             return null;
         }
         Ticket ticketResult;
-        if(parkingLot2 == null || parkingLot.getCurrentSize() <= parkingLot2.getCurrentSize()){
+        if(parkingLot2 == null || parkingLot.getAvailablePositionRate()>parkingLot2.getAvailablePositionRate() || parkingLot.getCurrentSize() <= parkingLot2.getCurrentSize()){
             ticketResult = parkingLot.parking(car);
         }else {
             ticketResult = parkingLot2.parking(car);
