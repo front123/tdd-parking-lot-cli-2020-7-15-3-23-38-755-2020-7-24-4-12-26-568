@@ -45,7 +45,7 @@ class ParkingBoyTest {
         Car car = parkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals(1, car.getId());
+        Assertions.assertEquals(car1, car);
     }
 
     @Test
