@@ -36,6 +36,6 @@ public class ParkingBoy {
     }
 
     public String parkingForFeedback(Car car) {
-        return null;
+        return "Not enough position.";
     }
 }
