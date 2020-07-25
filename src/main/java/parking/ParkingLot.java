@@ -26,4 +26,8 @@ public class ParkingLot {
     public boolean isFull() {
         return false;
     }
+
+    public int getCurrentSize() {
+        return currentSize;
+    }
 }
