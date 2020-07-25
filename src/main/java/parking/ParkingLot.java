@@ -37,7 +37,7 @@ public class ParkingLot {
         return currentSize;
     }
 
-    public int getEmptyPositionSize(){
-        return capacity - currentSize;
+    public double getAvailablePositionRate(){
+        return 0;
     }
 }

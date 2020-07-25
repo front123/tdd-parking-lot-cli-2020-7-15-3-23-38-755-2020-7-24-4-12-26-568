@@ -236,4 +236,26 @@ class ParkingBoyTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(ticket2.getParkingLotName(), ticket.getParkingLotName());
     }
+
+    @Test
+    void should_return_ticket_with_parking_lot1_when_parking_given_two_parking_lot_with_different_available_position_rate() {
+        //given
+        Car car = new Car(1);
+        Ticket ticket1 = new Ticket(1, "parking lot 1");
+        Ticket ticket2 = new Ticket(1, "parking lot 2");
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(2);
+        Mockito.when(parkingLot2.getCurrentSize()).thenReturn(1);
+        Mockito.when(parkingLot.parking(car)).thenReturn(ticket1);
+        Mockito.when(parkingLot2.parking(car)).thenReturn(ticket2);
+        Mockito.when(parkingLot.getAvailablePositionRate()).thenReturn(0.6);
+        Mockito.when(parkingLot2.getAvailablePositionRate()).thenReturn(0.2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+
+        //when
+        Ticket ticket = parkingBoy.parking(car);
+
+        //then
+        Assertions.assertEquals("parking lot 1", ticket.getParkingLotName());
+
+    }
 }
