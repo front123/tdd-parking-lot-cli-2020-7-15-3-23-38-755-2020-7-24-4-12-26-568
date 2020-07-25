@@ -19,8 +19,17 @@ public class ParkingBoy {
     }
 
     public Ticket parking(Car car){
-        if (car == null || parkingLot.isFull() || parkingLot.parking(car)==null ){
+        boolean isParkingLot2Full = parkingLot2 == null || parkingLot2.isFull();
+        if (car == null || (parkingLot.isFull() && isParkingLot2Full) ){
             return null;
+        }
+        if (parkingLot.parking(car) == null){
+            if (parkingLot2 == null){
+                return  null;
+            }
+            if (parkingLot2.parking(car) == null){
+                return  null;
+            }
         }
         return new Ticket(1);
     }
@@ -43,6 +52,10 @@ public class ParkingBoy {
     }
 
     public String parkingForFeedback(Car car) {
+        boolean isParkingLot2Full = parkingLot2 == null || parkingLot2.isFull();
+        if (!parkingLot.isFull() || !isParkingLot2Full){
+            return null;
+        }
         return "Not enough position.";
     }
 }
