@@ -14,8 +14,8 @@ public class ParkingLot {
         this.cars = new ArrayList<>(maxSize);
     }
 
-    public boolean parking(Car car){
-        return true;
+    public Ticket parking(Car car){
+        return null;
     }
 
     public List<Car> getCars() {

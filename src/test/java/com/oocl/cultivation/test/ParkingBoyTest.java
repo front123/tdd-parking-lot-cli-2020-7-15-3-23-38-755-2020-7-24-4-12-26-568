@@ -125,6 +125,7 @@ class ParkingBoyTest {
 
         //when
         Ticket ticketFirst = parkingBoy.parking(car);
+        Mockito.when(parkingLot.parking(car)).thenReturn(new Ticket(1));
         Ticket ticket = parkingBoy.parking(car);
 
         //then
