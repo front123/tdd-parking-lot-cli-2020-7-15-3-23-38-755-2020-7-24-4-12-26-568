@@ -27,4 +27,8 @@ public class ParkingBoy {
         }
         return null;
     }
+
+    public String fetchCarForFeedback(Ticket ticket) {
+        return null;
+    }
 }
