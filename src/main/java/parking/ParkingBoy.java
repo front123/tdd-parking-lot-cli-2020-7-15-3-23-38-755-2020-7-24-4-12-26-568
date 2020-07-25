@@ -23,11 +23,10 @@ public class ParkingBoy {
         if (car == null || (parkingLot.isFull() && isParkingLot2Full) ){
             return null;
         }
-        Ticket ticketResult = parkingLot.parking(car);
-        if (ticketResult == null){
-            if (parkingLot2 == null){
-                return  null;
-            }
+        Ticket ticketResult;
+        if(parkingLot2 == null || parkingLot.getCurrentSize() <= parkingLot2.getCurrentSize()){
+            ticketResult = parkingLot.parking(car);
+        }else {
             ticketResult = parkingLot2.parking(car);
         }
         return ticketResult;

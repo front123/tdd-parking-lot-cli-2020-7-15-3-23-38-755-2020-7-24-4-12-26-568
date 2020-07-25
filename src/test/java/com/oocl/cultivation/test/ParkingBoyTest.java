@@ -200,6 +200,8 @@ class ParkingBoyTest {
         Car car = new Car(1);
         Mockito.when(parkingLot.isFull()).thenReturn(true);
         Mockito.when(parkingLot2.isFull()).thenReturn(false);
+        Mockito.when(parkingLot.getCurrentSize()).thenReturn(10);
+        Mockito.when(parkingLot2.getCurrentSize()).thenReturn(1);
         Mockito.when(parkingLot.parking(car)).thenReturn(null);
         Mockito.when(parkingLot2.parking(car)).thenReturn(new Ticket(1));
         Mockito.when(parkingLot2.parking(car)).thenReturn(new Ticket(1));
