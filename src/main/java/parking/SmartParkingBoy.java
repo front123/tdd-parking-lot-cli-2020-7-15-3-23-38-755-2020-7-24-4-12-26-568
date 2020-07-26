@@ -2,8 +2,8 @@ package parking;
 
 public class SmartParkingBoy extends ParkingBoy {
 
-    public SmartParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
-        super(parkingLot, parkingLot2);
+    public SmartParkingBoy(ParkingLot... parkingLots) {
+        super(parkingLots);
     }
 
     @Override
