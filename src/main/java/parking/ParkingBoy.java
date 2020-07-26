@@ -2,6 +2,7 @@ package parking;
 
 import exception.NotEnoughPositionException;
 import exception.NullTicketException;
+import exception.UnrecognizedParkingTicketException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,9 +37,12 @@ public class ParkingBoy {
         return ticketResult;
     }
 
-    public Car fetchCar(Ticket ticket) throws NullTicketException {
+    public Car fetchCar(Ticket ticket) throws NullTicketException, UnrecognizedParkingTicketException {
         if (ticket == null){
             throw new NullTicketException("Please provide your parking ticket.");
+        }
+        if (!ticket.isValid()){
+            throw new UnrecognizedParkingTicketException("Unrecognized parking ticket.");
         }
         for (ParkingLot parkingLot: parkingLots) {
             for (Car car: parkingLot.getCars()) {
@@ -49,17 +53,6 @@ public class ParkingBoy {
             }
         }
         return null;
-    }
-
-    public String fetchCarForFeedback(Ticket ticket) {
-        if (ticket == null){
-            return "Please provide your parking ticket.";
-        }
-        return "Unrecognized parking ticket.";
-    }
-
-    public String parkingForFeedback(Car car) {
-        return "Not enough position.";
     }
 
     public List<ParkingLot> getParkingLots(){

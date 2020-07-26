@@ -2,6 +2,7 @@ package com.oocl.cultivation.test;
 
 import exception.NotEnoughPositionException;
 import exception.NullTicketException;
+import exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +32,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() throws NullTicketException {
+    void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() throws NullTicketException, UnrecognizedParkingTicketException {
         //given
         Ticket ticket = new Ticket(1);
         Car car1 = new Car(1);
@@ -48,7 +49,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_a_ticket() throws NullTicketException {
+    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_a_ticket() throws NullTicketException, UnrecognizedParkingTicketException {
         //given
         Car car1 = new Car(1);
         Car car2 = new Car(2);
@@ -82,6 +83,8 @@ class ParkingBoyTest {
             car = parkingBoy.fetchCar(null);
         }catch (NullTicketException e){
             car = null;
+        }catch (UnrecognizedParkingTicketException e){
+            car = null;
         }
 
         //then
@@ -100,7 +103,12 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        Car car = parkingBoy.fetchCar(ticket);
+        Car car;
+        try{
+            car = parkingBoy.fetchCar(ticket);
+        }catch (UnrecognizedParkingTicketException e){
+            car = null;
+        }
 
         //then
         Assertions.assertNull(car);
@@ -169,10 +177,10 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        String message = parkingBoy.fetchCarForFeedback(ticket);
+        Throwable throwable = Assertions.assertThrows(UnrecognizedParkingTicketException.class, ()->parkingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.", message);
+        Assertions.assertEquals("Unrecognized parking ticket.", throwable.getMessage());
 
     }
 
