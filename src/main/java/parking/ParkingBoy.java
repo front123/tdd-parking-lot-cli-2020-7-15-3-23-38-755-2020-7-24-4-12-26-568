@@ -1,5 +1,6 @@
 package parking;
 
+import exception.NotEnoughPositionException;
 import exception.NullTicketException;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class ParkingBoy {
         this.parkingLots.addAll(Arrays.asList(parkingLots));
     }
 
-    public Ticket parking(Car car){
+    public Ticket parking(Car car) throws NotEnoughPositionException {
         if (car == null){
             return null;
         }
@@ -29,8 +30,7 @@ public class ParkingBoy {
             }
         }
         if(isAllParkingLotFull){
-            // throw message: Not enough position.
-            return null;
+            throw new NotEnoughPositionException("Not enough position.");
         }
 
         return ticketResult;

@@ -1,5 +1,6 @@
 package com.oocl.cultivation.test;
 
+import exception.NotEnoughPositionException;
 import exception.NullTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,6 @@ import org.mockito.Mockito;
 import parking.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 class ParkingBoyTest {
@@ -16,7 +15,7 @@ class ParkingBoyTest {
     private final ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
     private final ParkingLot parkingLot2 = Mockito.mock(ParkingLot.class);
     @Test
-    void should_return_a_ticket_when_parking_given_a_car() {
+    void should_return_a_ticket_when_parking_given_a_car() throws NotEnoughPositionException {
         //given
         Car car = new Car(1);
         Ticket ticketExpected = new Ticket(1);
@@ -115,14 +114,19 @@ class ParkingBoyTest {
         Car car = new Car(1);
 
         //when
-        Ticket ticket = parkingBoy.parking(car);
+        Ticket ticket;
+        try {
+            ticket = parkingBoy.parking(car);
+        }catch (NotEnoughPositionException e){
+            ticket = null;
+        }
 
         //then
         Assertions.assertNull(ticket);
     }
 
     @Test
-    void should_return_null_when_parking_given_a_parked_car() {
+    void should_return_null_when_parking_given_a_parked_car() throws NotEnoughPositionException {
         //given
         Mockito.reset(parkingLot);
         Car car = new Car(1);
@@ -142,7 +146,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_null_when_parking_given_a_null_car() {
+    void should_return_null_when_parking_given_a_null_car() throws NotEnoughPositionException {
         //given
         Mockito.reset(parkingLot);
         Mockito.when(parkingLot.isFull()).thenReturn(false);
@@ -193,13 +197,13 @@ class ParkingBoyTest {
         Mockito.when(parkingLot.isFull()).thenReturn(true);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         //when
-        String message = parkingBoy.parkingForFeedback(car);
+        Throwable throwable = Assertions.assertThrows(NotEnoughPositionException.class, ()->parkingBoy.parking(car));
         //then
-        Assertions.assertEquals("Not enough position.", message);
+        Assertions.assertEquals("Not enough position.", throwable.getMessage());
     }
 
     @Test
-    void should_return_ticket_when_parking_given_a_car_a_full_parking_lot_a_not_full_parking_lot() {
+    void should_return_ticket_when_parking_given_a_car_a_full_parking_lot_a_not_full_parking_lot() throws NotEnoughPositionException {
         //given
         Car car = new Car(1);
         Mockito.when(parkingLot.isFull()).thenReturn(true);
