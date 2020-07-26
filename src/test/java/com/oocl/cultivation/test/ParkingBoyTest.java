@@ -207,11 +207,9 @@ class ParkingBoyTest {
 
         //when
         Ticket ticket = parkingBoy.parking(car);
-        String message = parkingBoy.parkingForFeedback(car);
 
         //then
         Assertions.assertEquals(1, ticket.getId());
-        Assertions.assertNull(message);
     }
 
 
