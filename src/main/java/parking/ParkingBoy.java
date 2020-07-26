@@ -1,5 +1,7 @@
 package parking;
 
+import exception.NullTicketException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,10 +36,13 @@ public class ParkingBoy {
         return ticketResult;
     }
 
-    public Car fetchCar(Ticket ticket) {
+    public Car fetchCar(Ticket ticket) throws NullTicketException {
+        if (ticket == null){
+            throw new NullTicketException("Please provide your parking ticket.");
+        }
         for (ParkingLot parkingLot: parkingLots) {
             for (Car car: parkingLot.getCars()) {
-                if(ticket!=null && ticket.isValid() && car.getId() == ticket.getId()){
+                if(ticket.isValid() && car.getId() == ticket.getId()){
                     ticket.setValid(false);
                     return car;
                 }

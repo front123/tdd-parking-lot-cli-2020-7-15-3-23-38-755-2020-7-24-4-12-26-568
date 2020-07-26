@@ -1,5 +1,6 @@
 package com.oocl.cultivation.test;
 
+import exception.NullTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +32,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() {
+    void should_return_a_car_when_fetch_car_given_a_ticket_and_a_parking_boy() throws NullTicketException {
         //given
         Ticket ticket = new Ticket(1);
         Car car1 = new Car(1);
@@ -48,7 +49,7 @@ class ParkingBoyTest {
     }
 
     @Test
-    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_a_ticket() {
+    void should_return_correspond_car_when_parking_given_parking_lot_with_2_cars_and_a_ticket() throws NullTicketException {
         //given
         Car car1 = new Car(1);
         Car car2 = new Car(2);
@@ -77,14 +78,19 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        Car car = parkingBoy.fetchCar(null);
+        Car car ;
+        try {
+            car = parkingBoy.fetchCar(null);
+        }catch (NullTicketException e){
+            car = null;
+        }
 
         //then
         Assertions.assertNull(car);
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_a_already_used_ticket() {
+    void should_return_null_when_fetch_car_given_a_already_used_ticket() throws NullTicketException {
         //given
         Ticket ticket = new Ticket(1);
         ticket.setValid(false);
@@ -174,10 +180,10 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
-        String message = parkingBoy.fetchCarForFeedback(ticket);
+        Throwable throwable = Assertions.assertThrows(NullTicketException.class, () -> parkingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.", message);
+        Assertions.assertEquals("Please provide your parking ticket.", throwable.getMessage());
     }
 
     @Test
