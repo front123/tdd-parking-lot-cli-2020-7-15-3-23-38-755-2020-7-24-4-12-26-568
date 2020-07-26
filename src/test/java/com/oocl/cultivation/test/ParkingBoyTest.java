@@ -243,9 +243,9 @@ class ParkingBoyTest {
         Ticket ticket2 = new Ticket(1, "parking lot 2");
         Mockito.when(parkingLot.parking(car)).thenReturn(ticket1);
         Mockito.when(parkingLot2.parking(car)).thenReturn(ticket2);
-        Mockito.when(parkingLot.getAvailablePositionRate()).thenReturn(0.6);
+        Mockito.when(parkingLot.getAvailablePositionRate()).thenReturn(0.3);
         Mockito.when(parkingLot2.getAvailablePositionRate()).thenReturn(0.2);
-        ParkingBoy superSmartParkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLot, parkingLot2);
 
         //when
         Ticket ticket = superSmartParkingBoy.parking(car);
