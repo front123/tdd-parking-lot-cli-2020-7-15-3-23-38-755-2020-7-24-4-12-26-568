@@ -40,4 +40,8 @@ public class ParkingLot {
     public double getAvailablePositionRate(){
         return 0;
     }
+
+    public int getEmptyPositionSize(){
+        return 0;
+    }
 }

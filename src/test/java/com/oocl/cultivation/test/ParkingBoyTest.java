@@ -3,10 +3,7 @@ package com.oocl.cultivation.test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import parking.Car;
-import parking.ParkingBoy;
-import parking.ParkingLot;
-import parking.Ticket;
+import parking.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,15 +18,16 @@ class ParkingBoyTest {
     void should_return_a_ticket_when_parking_given_a_car() {
         //given
         Car car = new Car(1);
+        Ticket ticketExpected = new Ticket(1);
         Mockito.when(parkingLot.isFull()).thenReturn(false);
-        Mockito.when(parkingLot.parking(car)).thenReturn(new Ticket(1));
+        Mockito.when(parkingLot.parking(car)).thenReturn(ticketExpected);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //when
         Ticket ticket = parkingBoy.parking(car);
 
         //then
-        Assertions.assertEquals(1, ticket.getId());
+        Assertions.assertEquals(ticketExpected, ticket);
     }
 
     @Test
@@ -223,11 +221,11 @@ class ParkingBoyTest {
         Car car = new Car(1);
         Ticket ticket1 = new Ticket(1, "parking lot 1");
         Ticket ticket2 = new Ticket(1, "parking lot 2");
-        Mockito.when(parkingLot.getCurrentSize()).thenReturn(2);
-        Mockito.when(parkingLot2.getCurrentSize()).thenReturn(1);
+        Mockito.when(parkingLot.getEmptyPositionSize()).thenReturn(2);
+        Mockito.when(parkingLot2.getEmptyPositionSize()).thenReturn(3);
         Mockito.when(parkingLot.parking(car)).thenReturn(ticket1);
         Mockito.when(parkingLot2.parking(car)).thenReturn(ticket2);
-        ParkingBoy smartParkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot, parkingLot2);
 
         //when
         Ticket ticket = smartParkingBoy.parking(car);
